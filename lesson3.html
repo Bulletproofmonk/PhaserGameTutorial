@@ -1,0 +1,64 @@
+<html>
+
+<head>
+
+<script type="text/javascript" src="js/phaser.min.js"></script>
+
+</head>
+
+<body>
+
+<script>
+
+var game = new Phaser.Game(800,600,Phaser.CANVAS,'',{preload:preload,create:create,update:update});
+
+
+function preload() {
+	game.load.image('background', 'http://examples.phaser.io/assets/skies/deep-space.jpg');
+	game.load.image('ship','http://examples.phaser.io/assets/games/asteroids/ship.png');
+	//loads assets into your game	
+	
+}
+
+
+function create() {
+	game.add.tileSprite(0,0,game.width,game.height,'background');
+	player = game.add.sprite(400,300,'ship');
+	
+	upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+	downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+	leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+	rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+	
+	
+	// create objects for your game, set up your game
+	
+}
+
+function update() {
+	if (upKey.isDown) {
+		player.y=player.y-2;		
+	}
+	if (downKey.isDown) {
+		player.y=player.y+2;		
+	}
+	
+	if (leftKey.isDown) {
+		player.x=player.y-2;		
+	}
+	
+	if (rightKey.isDown) {
+		player.x=player.y-2;		
+	}
+		
+	//check for object collision, input from user etc.	
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

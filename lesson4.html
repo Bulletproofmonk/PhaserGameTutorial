@@ -1,0 +1,80 @@
+<html>
+
+<head>
+
+<script type="text/javascript" src="js/phaser.min.js"></script>
+
+</head>
+
+<body>
+
+<script>
+
+var game = new Phaser.Game(800,600,Phaser.CANVAS,'',{preload:preload,create:create,update:update});
+
+
+function preload() {
+	game.load.image('background', 'http://examples.phaser.io/assets/skies/deep-space.jpg');
+	game.load.image('ship','http://examples.phaser.io/assets/games/asteroids/ship.png');
+	game.load.spritesheet('enemy','http://examples.phaser.io/assets/games/invaders/invader32x32x4.png',32,32);
+	//loads assets into your game	
+	
+}
+
+
+function create() {
+	game.add.tileSprite(0,0,game.width,game.height,'background');
+	
+	// adding the player object
+	player = game.add.sprite(400,300,'ship');
+	player.anchor.setTo(0.5,0.5);
+	
+	// adding the enemy object
+	alien = game.add.sprite(100,100,'enemy');
+	alien.anchor.setTo(0.5,0.5);
+	alien.scale.setTo(2,2);
+	alien.animations.add('move',[0,1,2,3],20,true);
+	alien.animations.play('move');
+	
+	
+	upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+	downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+	leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+	rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+	
+	
+	// create objects for your game, set up your game
+	
+}
+
+function update() {
+	if (upKey.isDown) {
+		player.y=player.y-2;
+		player.angle=270;
+	}
+	if (downKey.isDown) {
+		player.y=player.y+2;	
+		player.angle=90;
+	}
+	
+	if (leftKey.isDown) {
+		player.x=player.y-2;	
+		player.angle=180;
+	}
+	
+	if (rightKey.isDown) {
+		player.x=player.y-2;
+		player.angle=0;
+	}
+		
+	//check for object collision, input from user etc.	
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -27,6 +27,7 @@ function create() {
 	
 	// adding the player object
 	player = game.add.sprite(400,300,'ship');
+	player.scale.setTo(1.5,1.5);
 	player.anchor.setTo(0.5,0.5);
 	
 	// adding the enemy object
@@ -58,12 +59,12 @@ function update() {
 	}
 	
 	if (leftKey.isDown) {
-		player.x=player.y-2;	
+		player.x=player.x-2;	
 		player.angle=180;
 	}
 	
 	if (rightKey.isDown) {
-		player.x=player.y-2;
+		player.x=player.x+2;
 		player.angle=0;
 	}
 		

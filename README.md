@@ -8,6 +8,8 @@ Completed Game can be tested at: http://magicmonktutorials.com/phaser/<br><br>
 <a href="https://github.com/Bulletproofmonk/PhaserGameTutorial/blob/master/lesson2.html">lesson2.html</a> - Lesson 2<br>
 <a href="https://github.com/Bulletproofmonk/PhaserGameTutorial/blob/master/lesson3.html">lesson3.html</a> - Lesson 3<br>
 <a href="https://github.com/Bulletproofmonk/PhaserGameTutorial/blob/master/lesson4.html">lesson4.html</a> - Lesson 4<br>
+<a href="https://github.com/Bulletproofmonk/PhaserGameTutorial/blob/master/lesson5.html">lesson5.html</a> - Lesson 5<br>
+<a href="https://github.com/Bulletproofmonk/PhaserGameTutorial/blob/master/lesson6.html">lesson6.html</a> - Lesson 6<br>
 
 <h3>Folders:</h3>
 <a href="https://github.com/Bulletproofmonk/PhaserGameTutorial/blob/master/js/">js</a> - Phaser Library imported<br><br>

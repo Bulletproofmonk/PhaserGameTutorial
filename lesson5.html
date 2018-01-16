@@ -10,14 +10,13 @@
 
 <script>
 
-var game = new Phaser.Game(800,600,Phaser.CANVAS,'',{preload:preload,create:create,update:update,render:render});
+var game = new Phaser.Game(800,600,Phaser.CANVAS,'',{preload:preload,create:create,update:update});
 
 
 function preload() {
 	game.load.image('background', 'http://examples.phaser.io/assets/skies/deep-space.jpg');
 	game.load.image('ship','http://examples.phaser.io/assets/games/asteroids/ship.png');
 	game.load.spritesheet('enemy','http://examples.phaser.io/assets/games/invaders/invader32x32x4.png',32,32);
-	game.load.image('bulletSprite','http://examples.phaser.io/assets/sprites/purple_ball.png');
 	//loads assets into your game	
 	
 }
@@ -44,20 +43,11 @@ function create() {
 	
 	game.physics.arcade.enable(alien);
 	
-	// set up bullets
-	bullets = game.add.group();
-	bullets.enableBody=true;
-	bullets.physicsBodyType=Phaser.Physics.ARCADE;
-	bullets.createMultiple(50,'bulletSprite');
-	bullets.setAll('checkWorldBounds',true);
-	bullets.setAll('outOfBoundsKill',true);
-	
-	
 	upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
 	downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
 	leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 	rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-	fireKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
+	
 	
 	// create objects for your game, set up your game
 	
@@ -104,28 +94,13 @@ function update() {
 				player.angle=0;
 			}		 
 	
-// fire the bullet with space bar
-	
-	if (fireKey.isDown) {
-		fire();
-	}
+
+
 		
 	//check for object collision, input from user etc.	
 
 }
 
-function render () {
-	game.debug.text('Time elapsed: '+game.time.now,50,50);
-	// game.debug.spriteInfo(player,50,100);
-	game.debug.text('Active bullets: '+bullets.countLiving(),50,100)
-}
-	
-function fire() {
-	var bullet=bullets.getFirstDead();
-	bullet.reset(player.x,player.y);
-	
-}
-	
 function die () {
 	player.kill();
 	

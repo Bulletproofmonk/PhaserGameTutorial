@@ -13,30 +13,26 @@
 var game = new Phaser.Game(800,600,Phaser.CANVAS,'',{preload:preload,create:create,update:update,render:render});
 
 
-//loads assets into your game
-
 function preload() {
 	game.load.image('background', 'http://examples.phaser.io/assets/skies/deep-space.jpg');
 	game.load.image('ship','http://examples.phaser.io/assets/games/asteroids/ship.png');
 	game.load.spritesheet('enemy','http://examples.phaser.io/assets/games/invaders/invader32x32x4.png',32,32);
 	game.load.image('bulletSprite','http://examples.phaser.io/assets/sprites/purple_ball.png');
+	//loads assets into your game	
 	
 }
 
-// the time in ms between each bullet fired
+// time in ms between each bullet fired
 var fireRate = 100;
-
-// the time in ms since the start of the game when the next bullet is allowed to be fired
+	
+// time in ms since start of game when the next bullet is allowed to be fired	
 var nextFireTime = 0;
-
-//create objects for your game, set up your game
-
+	
+	
+	
 function create() {
 	
 	game.physics.startSystem(Phaser.Physics.ARCADE);
-	
-	
-	//set background to deep space
 	game.add.tileSprite(0,0,game.width,game.height,'background');
 	
 	// adding the player object
@@ -52,99 +48,103 @@ function create() {
 	alien.scale.setTo(2,2);
 	alien.animations.add('move',[0,1,2,3],20,true);
 	alien.animations.play('move');
-
+	
 	game.physics.arcade.enable(alien);
 	
 	// set up bullets
-	
 	bullets = game.add.group();
 	bullets.enableBody=true;
-	bullets.physicsBodyType = Phaser.Physics.ARCADE;
+	bullets.physicsBodyType=Phaser.Physics.ARCADE;
 	bullets.createMultiple(50,'bulletSprite');
 	bullets.setAll('checkWorldBounds',true);
-	bullets.setAll('outOfBoundsKill',true);	
+	bullets.setAll('outOfBoundsKill',true);
 	
-	
-	// make variables refer to key objects
 	
 	upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
 	downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
 	leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 	rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-	fireKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+	fireKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
+	
+	// create objects for your game, set up your game
 	
 }
 
 function update() {
 	
-	//check if player and aliens collide
-	game.physics.arcade.overlap(player,alien,die);
-		
-	//controls for player
-	if (upKey.isDown) {
-	player.y=player.y-2;
-	player.angle=270;	
-		if (leftKey.isDown) {
-			player.x=player.x-2;
-			player.angle=225;
-		}
-		if (rightKey.isDown) {
-			player.x=player.x+2;
-			player.angle=315;
-		}	
-	} else if (downKey.isDown) {
-	player.y=player.y+2;
-	player.angle=90;
+	// check if player and aliens collide
 	
-		if (leftKey.isDown) {
-			player.x=player.x-2;
-			player.angle=135;
-		}
-		if (rightKey.isDown) {
-			player.x=player.x+2;
-			player.angle=45;
-		}
-	} else if (leftKey.isDown) {
-			player.x=player.x-2;
-			player.angle=180;
-		} else if (rightKey.isDown) {
-			player.x=player.x+2;
-			player.angle=0;
-		}
+	game.physics.arcade.overlap(player,alien,die);
+	
+	// controls for player
+	if (upKey.isDown) {
+		player.y=player.y-2;
+		player.angle=270;
+			if (leftKey.isDown) {
+				player.x=player.x-2;	
+				player.angle=225;
+			}
+			
+			if (rightKey.isDown) {
+				player.x=player.x+2;
+				player.angle=315;
+			}
 		
-	// fire the bullet with the spacebar
+	} else if (downKey.isDown) {
+		player.y=player.y+2;	
+		player.angle=90;
+			if (leftKey.isDown) {
+				player.x=player.x-2;	
+				player.angle=135;
+			}
+			
+			if (rightKey.isDown) {
+				player.x=player.x+2;
+				player.angle=45;
+			}		
+		
+	} else if (leftKey.isDown) {
+				player.x=player.x-2;	
+				player.angle=180;
+			} else if (rightKey.isDown) {
+				player.x=player.x+2;
+				player.angle=0;
+			}		 
+	
+// fire the bullet with space bar
+	
 	if (fireKey.isDown) {
 		fire();
 	}
-	
-	
+		
 	//check for object collision, input from user etc.	
 
 }
 
 function render () {
 	game.debug.text('Time elapsed: '+game.time.now,50,50);
-	game.debug.text('Active bullets: '+bullets.countLiving(),50,100);
-//	game.debug.spriteInfo(player,50,100);
-	
+	// game.debug.spriteInfo(player,50,100);
+	game.debug.text('Active bullets: '+bullets.countLiving(),50,100)
 }
-
-
+	
 function fire() {
 	if (game.time.now>nextFireTime) {
+		
 		// increase nextFireTime variable to when another bullet is allowed to be fired.
 		nextFireTime = game.time.now + fireRate;
-	var bullet = bullets.getFirstDead();
+	
+	var bullet=bullets.getFirstDead();
 	bullet.reset(player.x,player.y);
 	game.physics.arcade.velocityFromAngle(player.angle,300,bullet.body.velocity);
 	}
-	
+		
 }
-
+	
 function die () {
-player.kill();	
+	player.kill();
 	
 }
+	
 
 </script>
 

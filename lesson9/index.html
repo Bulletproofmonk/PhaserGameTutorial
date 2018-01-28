@@ -1,0 +1,21 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+	<script src="js/phaser.min.js"></script>
+	<script src="js/state1.js"></script>
+	<script src="js/state2.js"></script>
+	<script>
+		var game = new Phaser.Game(800,600,Phaser.CANVAS);
+		game.state.add("state1",state1);
+		game.state.add("state2",state2);
+		game.state.start("state1");
+	</script>
+
+<title>Magic Monk Space Shooter</title>
+</head>
+
+<body>
+</body>
+</html>

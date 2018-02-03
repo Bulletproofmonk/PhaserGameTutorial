@@ -45,7 +45,9 @@ create: function() {
 	
 	blaster = game.add.audio('blaster',0.5);
 	explosion = game.add.audio('explosion',0.5);
-	song = game.add.audio('song',0.2);
+	
+	// add the song audio to the game with loop (third argument true)
+	song = game.add.audio('song',0.2,true);
 	song.play();
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.add.tileSprite(0,0,game.width,game.height,'background');
